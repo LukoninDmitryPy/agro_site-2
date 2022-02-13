@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} {{ product_id.name|truncatewords:30 }} {% endblock title %}
+{% block content %}
+<div class="row">
+  <aside class="col-12 col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Наименование: {{ product_id.name }}
+      </li>
+      <li class="list-group-item">
+        Категория: {{ product_id.product_group }}
+      </li>
+      <li class="list-group-item">
+        Цена: {{ product_id.price }}
+      </li>
+      <li class="list-group-item">
+        Описание: {{ product_id.description }}
+      </li>
+      <li class="list-group-item">
+        В наличии: {{ product_id.count }}
+      </li>
+      <br>
+      <br>
+      <a class="btn btn-primary">
+        Добавить в корзину
+      </a>
+    </ul>
+  </aside>
+</div> 
+{% endblock %}

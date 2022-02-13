@@ -1,0 +1,27 @@
+{% load static %}
+<nav class="navbar navbar-light" style="background-color: lightskyblue">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'sales_backend:index' %}">
+      <img src="{% static 'img/logo.png'%}" width="100" height="30" class="d-inline-block align-top" alt="">
+        <span style="color:red">AGRO</span><span>TORG</span>
+    </a>
+    <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link href=">
+      <span style="color:red">Поиск</span> по товарам</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link href=">
+        <span style="color:red">Помощь</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link href=">
+        <span style="color:red">Войти</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link href=">
+        <span style="color:red">Зарегистрироваться</span></a>
+    </li>
+    </ul>
+  </div>
+</nav>

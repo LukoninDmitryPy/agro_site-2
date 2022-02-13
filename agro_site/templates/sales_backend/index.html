@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Последние обновления на сайте{% endblock title %}
+
+{% block content %}
+  <div class="card col-12">     
+    <h1 class="card-header">Последние обновления на сайте</h1>
+      {% for product_group in page_obj %}
+        <ul>
+          <li>
+            Категория товара: {{ product_group }}
+            <br>
+            <a href="{% url 'sales_backend:product_group' product_group.slug %}" class="btn btn-primary">
+            Все товары данной категории
+            </a>
+          </li>
+        </ul> 
+        {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+  </div>
+  {% include 'sales_backend/includes/paginator.html' %}
+{% endblock %}
