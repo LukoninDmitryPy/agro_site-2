@@ -10,7 +10,7 @@
     {% for product in page_obj %}
       <ul>
         <li>
-        Товар: {{ product.name }}
+        <h4>Товар: <b>{{ product.name }}</b></h4>
         <br>
         <a href="{% url 'sales_backend:product_detail' product.id %}" class="btn btn-primary">
         Ссылка на этот товар

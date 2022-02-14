@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, render, redirect
-
+from django.shortcuts import get_object_or_404, render
 from .models import Product, ProductGroup
+from cart.forms import CartAddProductFrom
 
 
 def index(request):
@@ -28,11 +28,13 @@ def product_group(request, slug):
     return render(request, 'sales_backend/product_group.html', context)
 
 
-def product_detail(request, product_id):
-    product_id = get_object_or_404(Product, pk=product_id)
-    product_group = product_id.product_group
+def product_detail(request, id):
+    product_pk = get_object_or_404(Product, pk=id)
+    product_group = product_pk.product_group
+    cart_product_form = CartAddProductFrom()
     context = {
-        'product_id': product_id,
+        'product_pk': product_pk,
         'product_group': product_group,
+        'cart_product_form': cart_product_form
     }
     return render(request, 'sales_backend/product_detail.html', context)
