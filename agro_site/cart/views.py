@@ -1,11 +1,12 @@
 from django.shortcuts import render
+
+# Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from sales_backend.models import Product
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from .forms import CartAddProductFrom
 from django.views.decorators.http import require_POST
-
 
 @require_POST
 def cart_add(request, id):
@@ -17,7 +18,7 @@ def cart_add(request, id):
         cart.add(
             product=product,
             count=product.count,
-            quantity=cd['количество'],
+            quantity=cd['Количество'],
         )
     return redirect(
         'sales_backend:product_detail',
@@ -61,8 +62,7 @@ def cart_clear(request):
     cart.clear()
     return redirect("cart:cart_detail")
 
-
-# @login_required(login_url="/users/login")
+@login_required(login_url="/users/login")
 def cart_detail(request):
     cart = Cart(request)
     return render(

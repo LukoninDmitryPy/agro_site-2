@@ -14,18 +14,34 @@
         <a class="nav-link href=">
         <span style="color:red">Помощь</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link href=">
-        <span style="color:red">Войти</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link href=">
-        <span style="color:red">Зарегистрироваться</span></a>
-    </li>
+    
+    
+    
+    {% if user.is_authenticated %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'cart:cart_detail' %}">
       <span style="color:red">Корзина</span></a>
     </li>
+    <li class="nav-item"> 
+      <a class="nav-link link-light" href="{% url 'users:password_change_form' %}">Изменить пароль</a>
+    </li>
+    <li class="nav-item"> 
+      <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+    </li>
+
+    <li>
+      Пользователь: {{ user.username }}
+    <li>
+      {% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:login' %}">
+        <span style="color:red">Войти</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'users:signup' %}">
+      <span style="color:red">Зарегистрироваться</span></a>
+    </li>
+      {% endif %}
     </ul>
   </div>
 </nav>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Выход{% endblock %}
+{% block content %}
+    <h3>Вы успешно вышли из учетной записи.</h3>
+    <br>
+    <button class="btn btn-primary">
+    <a href="{% url 'login' %}">
+    <font color="white">Авторизоваться</font>
+    </a>
+    </button>
+{% endblock %}

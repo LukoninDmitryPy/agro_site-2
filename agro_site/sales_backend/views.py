@@ -1,5 +1,7 @@
 from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+from . import models, forms
+
 from .models import Product, ProductGroup
 from cart.forms import CartAddProductFrom
 
@@ -27,6 +29,17 @@ def product_group(request, slug):
     }
     return render(request, 'sales_backend/product_group.html', context)
 
+def create_product(request):
+    form = forms.ProductForm(request.POST or None)
+    if form.is_valid():
+        product = form.save(commit=False)
+        product.save()
+        return redirect('sales_backend:main_page')
+    return render(
+        request,
+        'sales_backend/create_product.html',
+        {'form': form}
+    )
 
 def product_detail(request, id):
     product_pk = get_object_or_404(Product, pk=id)

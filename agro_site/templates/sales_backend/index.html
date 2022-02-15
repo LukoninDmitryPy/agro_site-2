@@ -7,8 +7,7 @@
       {% for product_group in page_obj %}
         <ul>
           <li>
-            <h3>Категория товара: <b>{{ product_group }}</b></h3>
-            <br>
+            <h4><b>{{ product_group }}</b></h4>
             <a href="{% url 'sales_backend:product_group' product_group.slug %}" class="btn btn-primary">
             Все товары данной категории
             </a>
