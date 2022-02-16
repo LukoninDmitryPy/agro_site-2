@@ -114,3 +114,10 @@ CART_SESSION_ID = 'cart'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'sales_backend:index'
 
+DEFAULT_FROM_EMAIL = 'muxa2k11@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

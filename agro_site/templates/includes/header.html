@@ -3,24 +3,29 @@
   <div class="container">
     <a class="navbar-brand" href="{% url 'sales_backend:index' %}">
       <img src="{% static 'img/logo.png'%}" width="100" height="30" class="d-inline-block align-top" alt="">
-        <span style="color:red">AGRO</span><span>TORG</span>
+        <span>AGRO</span><span>TORG</span>
     </a>
     <ul class="nav nav-pills">
     <li class="nav-item">
       <a class="nav-link href=">
-      <span style="color:red">Поиск</span> по товарам</a>
+      <span>Поиск</span> по товарам</a>
     </li>
     <li class="nav-item">
         <a class="nav-link href=">
-        <span style="color:red">Помощь</span></a>
+        <span>Помощь</span></a>
     </li>
-    
-    
-    
     {% if user.is_authenticated %}
     <li class="nav-item">
+      <a class="nav-link" href="{% url 'sales_backend:contact' %}">
+      <span>Стать продавцом</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'sales_backend:create_product' %}">
+      <span>Добавить товар</span></a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="{% url 'cart:cart_detail' %}">
-      <span style="color:red">Корзина</span></a>
+      <span>Корзина</span></a>
     </li>
     <li class="nav-item"> 
       <a class="nav-link link-light" href="{% url 'users:password_change_form' %}">Изменить пароль</a>

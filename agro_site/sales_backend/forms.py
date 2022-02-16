@@ -13,3 +13,33 @@ class ProductForm(forms.ModelForm):
             'description',
             'count'
         )
+        labels = {
+            'name': 'Наименование товара',
+            'product_group': 'Категория товара',
+            'price': 'Цена',
+            'description': 'Описание',
+            'count': 'Наличие'
+        }
+
+
+class SellerForm(forms.Form):
+    from_email = forms.EmailField(
+        label='Email',
+        required=True,
+        help_text='Ваша электронная почта')
+    subject = forms.CharField(
+        label='Тема',
+        required=True,
+        help_text='''
+        В теме письма укажите название Вашей компании с
+        организационно-правовой-формой,
+        также укажите пометку "Хочу стать продавцом"
+        ''')
+    message = forms.CharField(
+        label='Сообщение',
+        widget=forms.Textarea, 
+        required=True,
+        help_text='''
+        Укажите, пожалуйста, Имя, Фамилию,
+        Телефон, ИНН организации или ИП
+        ''')
