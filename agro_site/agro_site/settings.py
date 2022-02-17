@@ -6,9 +6,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-0n7yvje91z!_l5f3kx=8#s7biqt*r+e58(y14q84b#g$c7j838'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
+    'www.sertest2.pythonanywhere.com',
+    'sertest2.pythonanywhere.com',
+]
 
 AUTHENTICATION_BACKENDS = (
     'users.authentication.EmailAuthBackend',
@@ -22,7 +29,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field',
     'api',
     'rest_framework',
     'sales_backend.apps.SalesBackendConfig',
@@ -94,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'UTC'
 
