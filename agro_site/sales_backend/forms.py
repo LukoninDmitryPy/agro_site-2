@@ -34,7 +34,8 @@ class SellerForm(forms.Form):
         В теме письма укажите название Вашей компании с
         организационно-правовой-формой,
         также укажите пометку "Хочу стать продавцом"
-        ''')
+        '''
+    )
     message = forms.CharField(
         label='Сообщение',
         widget=forms.Textarea, 

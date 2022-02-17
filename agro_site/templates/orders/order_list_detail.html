@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Подробнее о заказе {% endblock %}
+{% block content %}
+<div class="card col-12">
+  <h1 class="card-header">Подробная информация о заказе</h1>
+    {% for i in order_details %}
+    <ul>
+      <li>
+        <h5>Наименование: <b>{{ i.product }}</b></h5>
+        <h5>Количество (шт.): <b>{{ i.quantity }}</b></h5>
+        <h5>Общая стоимость: <b>{{ i.price }}</b></h5>
+      </li>
+    </ul>
+  {% if not forloop.last %}
+    <hr>
+  {% endif %}
+{% endfor %}
+{% endblock %}

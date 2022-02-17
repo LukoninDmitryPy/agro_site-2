@@ -53,8 +53,13 @@
         {% endfor %}
     </tbody>
   </table>
-</form> 
-  <a href="{% url 'cart:cart_clear' %}">
+</form>
+  <a href="{% url 'cart:cart_clear' %}" class="btn btn-primary">
     Очистить
   </a>
+  <div align="right">
+  <a href="{% url "orders:order_create" %}" class="btn btn-primary">
+  Оформить заказ
+  </a>
+  </div>
 {% endblock %}

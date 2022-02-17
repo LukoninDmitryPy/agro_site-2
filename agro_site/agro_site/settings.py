@@ -16,9 +16,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 INSTALLED_APPS = [
-    'sales_backend.apps.SalesBackendConfig',
-    'cart.apps.CartConfig',
-    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,7 +25,11 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'api',
     'rest_framework',
+    'sales_backend.apps.SalesBackendConfig',
+    'cart.apps.CartConfig',
+    'users.apps.UsersConfig',    
     'rest_framework.authtoken',
+    'orders.apps.OrdersConfig'
 ]
 
 REST_FRAMEWORK = {
@@ -74,7 +75,7 @@ WSGI_APPLICATION = 'agro_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
     }
 }
 

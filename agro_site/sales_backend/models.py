@@ -20,6 +20,11 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name='product',
     )
+    product_seller = models.ForeignKey(
+        User,
+        related_name='product_seller',
+        on_delete=models.CASCADE
+    )
     image = models.ImageField(
         upload_to='sales_backend/',
         blank=True,
@@ -28,5 +33,13 @@ class Product(models.Model):
     description = models.TextField()
     count = models.IntegerField()
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name', 'product_seller','product_group'],
+                name='unique_name_product_seller_product_group'
+            )
+        ]
+
     def __str__(self):
-        return self.name[:20]
+        return self.name

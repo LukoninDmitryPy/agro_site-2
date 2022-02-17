@@ -52,6 +52,7 @@ def create_product(request):
     form = forms.ProductForm(request.POST or None)
     if form.is_valid():
         product = form.save(commit=False)
+        product.product_seller = request.user
         product.save()
         return redirect('sales_backend:index')
     return render(request, 'sales_backend/create_product.html', {'form': form})

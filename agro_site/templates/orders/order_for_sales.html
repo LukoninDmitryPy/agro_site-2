@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for i in order_for_sale %}
+    {{ i.user_id }}
+    </br>
+{% endfor %}
+{% endblock %}

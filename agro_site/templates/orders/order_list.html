@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Список заказов {% endblock %}
+{% block content %}
+  <div class="card col-12">
+    <h1 class="card-header">Все заказы клиента: {{ user.username }}</h1>
+      {% for i in order %}
+        <ul>
+          <li>
+            <h5>Номер заказа: <b>{{ i.id }}</b></h5>
+            <h5>Дата покупки: <b>{{ i.created }}</b></h5>
+            <h5>Общая стоимость: <b>{{ i.price }}</b></h5>
+            <h5>Адрес доставки: <b>{{ i.address }}</b></h5>
+            <a href="{% url 'orders:order_list_detail' i.id %}" class="btn btn-primary">
+              Подробнее
+            </a>
+          </li>
+        </ul>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+      {% endfor %}
+{% endblock %}
