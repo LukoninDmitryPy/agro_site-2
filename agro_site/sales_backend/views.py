@@ -47,7 +47,7 @@ def product_detail(request, id):
     return render(request, 'sales_backend/product_detail.html', context)
 
 
-@permission_required('sales_backend.add_product')
+@permission_required('sales_backend.add_product', login_url='sales_backend:denied')
 def create_product(request):
     form = forms.ProductForm(request.POST or None)
     if form.is_valid():
@@ -84,3 +84,9 @@ def contact_view(request):
 
 def success_view(request):
     return render(request, 'sales_backend/success.html')
+
+
+def get_denied(request):
+    template = 'sales_backend/not_has_permission.html'
+    return render(request, template)
+

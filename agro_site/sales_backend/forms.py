@@ -11,14 +11,19 @@ class ProductForm(forms.ModelForm):
             'product_group',
             'price',
             'description',
-            'count'
+            'count',
+            'discount'
         )
         labels = {
             'name': 'Наименование товара',
             'product_group': 'Категория товара',
             'price': 'Цена',
             'description': 'Описание',
-            'count': 'Наличие'
+            'count': 'Наличие',
+            'discount': 'Скидка',
+        }
+        help_texts = {
+            'discount': 'Введите условие выполнение Вашей скидки'
         }
 
 

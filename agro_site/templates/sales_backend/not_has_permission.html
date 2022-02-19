@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Создать товар{% endblock title %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+            <h3><b>У вас нет доступа!</b></h3>
+            <a href="{% url 'sales_backend:contact'%}" class="btn btn-primary">Оставьте заявку</a>
+        </div> <!-- card body -->
+    </div> <!-- card -->
+  </div> <!-- col -->
+</div>
+{% endblock %}

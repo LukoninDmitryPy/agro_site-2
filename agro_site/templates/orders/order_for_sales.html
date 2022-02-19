@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for i in order_for_sale %}
-    {{ i.user_id }}
-    </br>
+<div class="card col-12">
+    <h1 class="card-header">Мои продажи</h1>
+      {% for i in order_for_sale %}
+      <br>
+      <ul>
+        <li>
+          <h5>Товары: <b>{{ i.product }}</b></h5>
+          <h5>Общая сумма заказа: <b>{{ i.price }}</b></h5>
+          <h5>Адрес выдачи заказа: <b>{{ i.order.postal_code }}, {{ i.order.city }}, {{ i.order.address }}</b></h5>
+          <h5>Дата покупки: <b>{{ i.order.created }}</b></h5>
+          <h5>Трек номер: <b>1321312313131</b></h5>
+          <h5>Статус заказа: <b>Новый</b></h5>
+          <h5>Статус оплаты: <b>В обработке</b></h5>
+        </li>
+    </ul>
+    {% if not forloop.last %}
+    <hr>
+    {% endif %}
 {% endfor %}
 {% endblock %}

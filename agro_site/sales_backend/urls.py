@@ -17,4 +17,6 @@ urlpatterns = [
     # Страница отправки формы продавца Сергею
     path('contact/', views.contact_view, name='contact'),
     path('success/', views.success_view, name='success'),
+    path('denied/', views.get_denied, name='denied'),
+
 ]

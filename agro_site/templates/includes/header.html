@@ -1,7 +1,7 @@
 {% load static %}
-<nav class="navbar navbar-light" style="background-color: lightskyblue">
+<nav class="navbar navbar-light" style="background-color: #90EE90">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'sales_backend:index' %}">
+    <a class="navbar navbar-expand-lg" href="{% url 'sales_backend:index' %}">
       <img src="{% static 'img/logo.png'%}" width="100" height="30" class="d-inline-block align-top" alt="">
         <span>AGRO</span><span>TORG</span>
     </a>
@@ -10,6 +10,10 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'orders:order_list' user.username %}">
       <span style=color:red>Мои покупки</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'orders:ordersales' user.username %}">
+      <span style=color:red>Мои продажи</span></a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'sales_backend:contact' %}">

@@ -32,6 +32,7 @@ class Product(models.Model):
     price = models.FloatField()
     description = models.TextField()
     count = models.IntegerField()
+    discount = models.CharField(max_length=200)
 
     class Meta:
         constraints = [

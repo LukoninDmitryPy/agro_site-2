@@ -63,20 +63,13 @@ def orderlistdetail(request, id):
         template, 
         {
             'order_details': order_details,
-            'order': order
+            'order': order,
         }
     )
 
 
 def ordersales(request, username):
     template = 'orders/order_for_sales.html'
-    seller = get_object_or_404(
-        User,
-        username=username
-    )
-    order_for_sale = OrderItem.objects.filter(seller__seller__user=seller)
-    return render(
-        request,
-        template,
-        {'order_for_sale': order_for_sale}
-    )
+    seller = get_object_or_404(User,username=username)
+    order_for_sale = OrderItem.objects.filter(seller_id=seller)
+    return render(request, template, {'order_for_sale': order_for_sale})

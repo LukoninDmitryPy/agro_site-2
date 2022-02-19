@@ -20,5 +20,10 @@ urlpatterns = [
         'my_sales/<str:username>/',
         views.ordersales,
         name='ordersales'        
-    )
+    ),
+    path(
+        'my_sales/<str:username>/',
+        views.ordersales,
+        name='ordersales'        
+    ),
 ]
