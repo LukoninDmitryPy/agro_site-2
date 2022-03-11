@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+        {% block title %}Последние обновления на сайте{% endblock %}
+        {% block content %}
+        <div class="container py-5">
+          {% for post in page_obj %}
+          {% include 'agroblog/includes/post_list.html' %}
+            {% if post.group %}   
+            <li class="d-flex justify-content-between"><a href="{% url 'agroblog:group_list' post.group.slug %}">все записи группы</a></li>
+            {% endif %}
+            {% if not forloop.last %}<hr>{% endif %}
+          {% endfor %}
+          {% include 'agroblog/includes/paginator.html' %}
+        </div>
+        {% endblock %} 

@@ -12,6 +12,8 @@
         <h5>Cтатус заказа: <b>Новый</b></h5>
         <h5>Cтатус оплаты: <b>В обработке</b></h5>
         <h5>Трек номер: <b>1213145464</b></h5>
+        <a class="btn btn-info" href="{% url 'orders:pdf_view' i.id%}" target="_blank">View Invoice</a>
+        <a class="btn btn-info"  href="{% url 'orders:pdf_download' i.id%}">Download Invoice</a>
       </li>
     </ul>
   {% if not forloop.last %}

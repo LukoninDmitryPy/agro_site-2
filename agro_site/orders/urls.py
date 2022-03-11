@@ -26,4 +26,6 @@ urlpatterns = [
         views.ordersales,
         name='ordersales'        
     ),
+    path('pdf_view/<int:id>/', views.ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_download/<int:id>/', views.DownloadPDF.as_view(), name="pdf_download"),
 ]

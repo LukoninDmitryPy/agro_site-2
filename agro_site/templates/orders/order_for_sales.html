@@ -14,7 +14,13 @@
           <h5>Статус заказа: <b>Новый</b></h5>
           <h5>Статус оплаты: <b>В обработке</b></h5>
         </li>
-    </ul>
+        <li>
+        <a class="btn btn-info" href="{% url 'orders:pdf_view' %}" target="_blank">View Invoice</a>
+      </li>
+        <li>
+				<a class="btn btn-info"  href="{% url 'orders:pdf_download' %}">Download Invoice</a>
+        </li>
+        </ul>
     {% if not forloop.last %}
     <hr>
     {% endif %}

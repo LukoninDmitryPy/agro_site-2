@@ -9,6 +9,10 @@ from agro_site.settings import DEFAULT_FROM_EMAIL
 
 from .models import Product, ProductGroup
 from cart.forms import CartAddProductFrom
+from django.views.generic import ListView
+from django.db.models import Q
+from agroblog.models import Post
+
 
 
 def index(request):
@@ -89,4 +93,21 @@ def success_view(request):
 def get_denied(request):
     template = 'sales_backend/not_has_permission.html'
     return render(request, template)
+
+
+class SearchResultsView(ListView):
+    template_name = 'sales_backend/search_results.html'
+
+    def get_queryset(self): # новый
+        query = self.request.GET.get('q')
+        object_list = (
+        Product.objects.filter(
+            Q(name__icontains=query)),
+        Post.objects.filter(
+            Q(text__icontains=query))
+        )
+        # object_list =Product.objects.filter(
+        #     Q(name__icontains=query))
+        return object_list
+
 

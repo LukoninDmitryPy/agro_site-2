@@ -35,7 +35,10 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'users.apps.UsersConfig',    
     'rest_framework.authtoken',
-    'orders.apps.OrdersConfig'
+    'orders.apps.OrdersConfig',
+    'agroblog.apps.AgroblogConfig',
+    'core.apps.CoreConfig',
+    'sorl.thumbnail',
 ]
 
 REST_FRAMEWORK = {
@@ -128,3 +131,4 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+TEN = 10

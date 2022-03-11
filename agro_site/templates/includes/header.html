@@ -15,25 +15,28 @@
       <a class="nav-link" href="{% url 'orders:ordersales' user.username %}">
       <span style=color:red>Мои продажи</span></a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'sales_backend:contact' %}">
-      <span>Стать продавцом</span></a>
-    </li>
+    
+    {% if perms.sales_backend.add_product %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'sales_backend:create_product' %}">
       <span>Добавить товар</span></a>
     </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'sales_backend:contact' %}">
+      <span>Стать продавцом</span></a>
+    </li>
+    {% endif %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'cart:cart_detail' %}">
       <span>Корзина</span></a>
     </li>
     <li class="nav-item"> 
-      <a class="nav-link link-light" href="{% url 'users:password_change_form' %}">Изменить пароль</a>
+      <a class="nav-link link-light" href="">Изменить пароль</a>
     </li>
     <li class="nav-item"> 
-      <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+      <a class="nav-link link-light" href="">Выйти</a>
     </li>
-
     <li>
       Пользователь: {{ user.username }}
     <li>
@@ -43,10 +46,15 @@
         <span style="color:red">Войти</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'users:signup' %}">
+      <a class="nav-link" href="">
       <span>Зарегистрироваться</span></a>
     </li>
       {% endif %}
+    <li class="nav-item">
+      <form action="{% url 'sales_backend:search_results' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+      </form>
+    </li>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Оформление заказа{% endblock title %}
+{% block content %}
+<h1>Поисковой запрос</h1>
+ 
+<ul>
+  {% for i in object_list %}
+    {% for f in i %}
+    <li>
+      {{ f.name }}
+      {{ f.product_group }}
+    </li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+{% endblock %}

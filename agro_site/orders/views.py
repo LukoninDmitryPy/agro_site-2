@@ -1,4 +1,5 @@
 import re
+from unittest import result
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -6,6 +7,13 @@ from django.contrib.auth.models import User
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
+
+from django.shortcuts import render
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
 
 
 def order_create(request):
@@ -73,3 +81,55 @@ def ordersales(request, username):
     seller = get_object_or_404(User,username=username)
     order_for_sale = OrderItem.objects.filter(seller_id=seller)
     return render(request, template, {'order_for_sale': order_for_sale})
+
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+
+data = {
+    "company": "Dennnis Ivanov Company",
+    "address": "123 Street name",
+    "city": "Vancouver",
+    "state": "WA",
+    "zipcode": "98663",
+
+
+    "phone": "555-555-2345",
+    "email": "youremail@dennisivy.com",
+    "website": "dennisivy.com",
+    }
+
+#Opens up page as PDF
+class ViewPDF(View):
+    def get(self, request, id, *args, **kwargs):
+        order = get_object_or_404(Order,pk=id)
+        order_details = order.items.all()
+        data = {
+            'order_details': order_details
+        }
+        pdf = render_to_pdf('orders/pdf_template.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+
+#Automaticly downloads to PDF file
+class DownloadPDF(View):
+    def get(self, request, id, *args, **kwargs):
+        order = get_object_or_404(Order,pk=id)
+        order_details = order.items.all()
+        data = {
+            'order_details': order_details
+        }
+        pdf = render_to_pdf('orders/pdf_template.html', data)
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Invoice_%s.pdf" %("12341231")
+        content = "attachment; filename='%s'" %(filename)
+        response['Content-Disposition'] = content
+        return response

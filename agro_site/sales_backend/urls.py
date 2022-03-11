@@ -18,5 +18,5 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('success/', views.success_view, name='success'),
     path('denied/', views.get_denied, name='denied'),
-
+    path('search/', views.SearchResultsView.as_view(), name='search_results'),
 ]
