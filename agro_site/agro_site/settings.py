@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-0n7yvje91z!_l5f3kx=8#s7biqt*r+e58(y14q84b#g$c7j838'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    'phonenumber_field',
     'sales_backend.apps.SalesBackendConfig',
     'cart.apps.CartConfig',
     'users.apps.UsersConfig',    
@@ -132,3 +133,10 @@ EMAIL_HOST_PASSWORD = 'SG.SER77iwkRhqZH9VaFSy_3A.BQMe57zWZ7PbwBcM7JIyBgC87L46Pgh
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 TEN = 10
+
+AUTH_USER_MODEL = 'users.MyUser'
+
+AUTHENTICATION_BACKENDS = [
+    'users.authentication.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    ]

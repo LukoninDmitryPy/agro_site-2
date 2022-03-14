@@ -32,10 +32,10 @@
       <span>Корзина</span></a>
     </li>
     <li class="nav-item"> 
-      <a class="nav-link link-light" href="">Изменить пароль</a>
+      <a class="nav-link link-light" href="{% url 'users:password_change_form' %}">Изменить пароль</a>
     </li>
     <li class="nav-item"> 
-      <a class="nav-link link-light" href="">Выйти</a>
+      <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
     </li>
     <li>
       Пользователь: {{ user.username }}
@@ -46,7 +46,7 @@
         <span style="color:red">Войти</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{% url 'users:signup' %}">
       <span>Зарегистрироваться</span></a>
     </li>
       {% endif %}

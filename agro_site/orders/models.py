@@ -3,7 +3,8 @@ from django.db.models.expressions import F
 from django.db.models.query_utils import Q
 
 from sales_backend.models import Product
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from users.models import MyUser as User
 
 
 class Order(models.Model):

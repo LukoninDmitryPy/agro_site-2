@@ -1,20 +1,21 @@
 import email
-from django.contrib.auth.models import User
-from .models import Profile
+# from django.contrib.auth.models import User
+from .models import MyUser as User
+from django.db.models import Q
+from django.contrib.auth.hashers import check_password
+
 
 class EmailAuthBackend(object):
     """
     Authenticate using e-mail account.
     """
     def authenticate(self, username=None, password=None):
-        if '@' in username:
-            kwargs = {'email': username}
-        else:
-            kwargs = {'username': username}
         try:
-            user = User.objects.get(**kwargs)
-            if user.check_password(password):
+            user = User.objects.get(Q(username__iexact=username) | Q(email__iexact=username) | Q(phone__iexact=username))
+            if check_password(password, user.password):
                 return user
+            else:
+                return None
         except User.DoesNotExist:
             return None
 
