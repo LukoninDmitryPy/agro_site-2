@@ -6,6 +6,12 @@ from sales_backend.models import Product
 # from django.contrib.auth.models import User
 from users.models import MyUser as User
 
+STATUSES=(
+    ('В обработке', 'В обработке'),
+    ('Заказ собран', 'Заказ собран'),
+    ('Заказ отправлен', 'Заказ отправлен'),
+)
+
 
 class Order(models.Model):
     address = models.CharField(max_length=250)
@@ -19,11 +25,14 @@ class Order(models.Model):
         related_name='user',
         on_delete=models.CASCADE
     )
-
+    status_order = models.CharField(
+        max_length=20,
+        choices=STATUSES,
+        default='В обработке'
+    )
 
     class Meta:
         ordering = ('-created',)
-        verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
@@ -31,12 +40,13 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
+    
 
 
 class OrderItem(models.Model):
     user = models.ForeignKey(
         User,
-        related_name='order_user',
+        related_name='order_users',
         on_delete=models.CASCADE
     )
     seller = models.ForeignKey(

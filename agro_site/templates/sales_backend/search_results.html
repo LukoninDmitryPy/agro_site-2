@@ -6,10 +6,27 @@
 <ul>
   {% for i in object_list %}
     {% for f in i %}
+    {% if f.name %}
     <li>
       {{ f.name }}
-      {{ f.product_group }}
+      <a href="{% url 'sales_backend:product_detail' f.id %}" class="btn btn-primary">
+        Подробнее
+        </a>
     </li>
+    {% endif %}
+    {% if f.title %}
+    <li>
+      {{ f.title }}
+      <a href="{% url 'sales_backend:product_group' f.slug %}" class="btn btn-primary">
+        Подробнее
+        </a>
+    </li>
+    {% endif %}
+    {% if f.text %}
+    <li>
+      {{ f.text }}
+    </li>
+    {% endif %}
     {% endfor %}
   {% endfor %}
 </ul>

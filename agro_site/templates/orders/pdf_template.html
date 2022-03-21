@@ -31,8 +31,7 @@
         <!-- HTML Content -->
         <table>
             {% for i in order_details %}
-            <td>{{ i.product }}</td>
-            <td>{{ i.quantity }}</td>
+            <td>{{ i.order.address }}</td>
         {% endfor %}
         </table>
     

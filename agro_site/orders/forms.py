@@ -18,3 +18,10 @@ class OrderCreateForm(forms.ModelForm):
         help_texts = {
             'address': 'Страна, область, город, улица/проспект/иное, дом/строение/иное, квартира/офис/иное'
         }
+
+class OrderCollectingForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = [
+            'status_order',
+        ]

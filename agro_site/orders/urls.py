@@ -22,9 +22,9 @@ urlpatterns = [
         name='ordersales'        
     ),
     path(
-        'my_sales/<str:username>/',
-        views.ordersales,
-        name='ordersales'        
+        'my_sales_order/<int:id>/',
+        views.ordersales_detail,
+        name='ordersales_detail'        
     ),
     path('pdf_view/<int:id>/', views.ViewPDF.as_view(), name="pdf_view"),
     path('pdf_download/<int:id>/', views.DownloadPDF.as_view(), name="pdf_download"),

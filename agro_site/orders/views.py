@@ -2,13 +2,13 @@ import re
 from unittest import result
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
+from users.models import MyUser as User
 
 from .models import OrderItem, Order
-from .forms import OrderCreateForm
+from .forms import OrderCreateForm, OrderCollectingForm
 from cart.cart import Cart
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -76,11 +76,25 @@ def orderlistdetail(request, id):
     )
 
 
-def ordersales(request, username):
+def ordersales(request, username,):
     template = 'orders/order_for_sales.html'
     seller = get_object_or_404(User,username=username)
     order_for_sale = OrderItem.objects.filter(seller_id=seller)
-    return render(request, template, {'order_for_sale': order_for_sale})
+    return render(request, template, {'order_for_sale': order_for_sale,})
+
+
+def ordersales_detail(request, id):
+    template = 'orders/order_for_sales_detail.html'
+    order_for_sale = OrderItem.objects.filter(order_id=id)
+    order = Order.objects.get(pk=id)
+    form = OrderCollectingForm(instance=order)
+    
+    if request.method == 'POST':
+        form = OrderCollectingForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    return render(request, template, {'order_for_sale': order_for_sale, 'form': form})
 
 
 def render_to_pdf(template_src, context_dict={}):

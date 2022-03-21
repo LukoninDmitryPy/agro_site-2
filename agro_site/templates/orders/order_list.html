@@ -10,6 +10,7 @@
             <h5>Дата покупки: <b>{{ i.created }}</b></h5>
             <h5>Общая стоимость: <b>{{ i.price }}</b></h5>
             <h5>Адрес доставки: <b>{{ i.address }}</b></h5>
+            <h5>Адрес доставки: <b>{{ i.status_order }}</b></h5>
             <h5>Трек номер: <b>1213145464</b></h5>
             <a href="{% url 'orders:order_list_detail' i.id %}" class="btn btn-primary">
               Подробнее

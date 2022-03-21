@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load user_filters %} 
 {% block content %}
 <div class="card col-12">
     <h1 class="card-header">Мои продажи</h1>
@@ -12,10 +13,26 @@
           <h5>Дата покупки: <b>{{ i.order.created }}</b></h5>
           <h5>Трек номер: <b>1321312313131</b></h5>
           <h5>Статус оплаты: <b>Не оплачен</b></h5>
-          <h5>Статус заказа: <b>{{ i.order.status_order }}</b></h5>
-          <a href="{% url 'orders:ordersales_detail' i.id  %}" class="btn btn-primary">
-            Подробнее
-          </a>
+          <h5>
+          <form method="POST" action="">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="row g-3 align-items-center">
+              <div class="col-auto">
+                <label for="inputPassword6" class="col-form-label">Статус заказа: </label>
+              </div>
+              <div class="form-group row my-1 p-1 g-3 col-2">
+                {{ field|addclass:'form-control' }}
+              </div>
+            </div>
+            {% endfor %}
+            <div>
+              <button type="submit" class="btn btn-primary">
+                Сохранить
+              </button>
+            </div>
+          </form></h5>
+          
           <a class="btn btn-info" href="{% url 'orders:pdf_view' i.id%}" target="_blank">View Invoice</a>
           <a class="btn btn-info"  href="{% url 'orders:pdf_download' i.id%}">Download Invoice</a>
         </li>

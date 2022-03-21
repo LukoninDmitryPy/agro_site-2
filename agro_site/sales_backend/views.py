@@ -104,10 +104,10 @@ class SearchResultsView(ListView):
         Product.objects.filter(
             Q(name__icontains=query)),
         Post.objects.filter(
-            Q(text__icontains=query))
+            Q(text__icontains=query)),
+        ProductGroup.objects.filter(
+            Q(title__icontains=query))
         )
-        # object_list =Product.objects.filter(
-        #     Q(name__icontains=query))
         return object_list
 
 
