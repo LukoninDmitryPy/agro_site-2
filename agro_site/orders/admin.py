@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Message, Chat
 
 # @admin.register(Order)
 class OrderItemInline(admin.TabularInline):
@@ -25,3 +25,6 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
 
 # admin.site.register(Order, OrderAdmin)
+
+admin.site.register(Chat)
+admin.site.register(Message)

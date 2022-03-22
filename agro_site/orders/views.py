@@ -1,11 +1,10 @@
 import re
 from unittest import result
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from users.models import MyUser as User
 
-from .models import OrderItem, Order
-from .forms import OrderCreateForm, OrderCollectingForm
+from .models import OrderItem, Order, Chat, Message
+from .forms import OrderCreateForm, OrderCollectingForm, MessageForm
 from cart.cart import Cart
 
 from django.shortcuts import render, redirect
@@ -14,6 +13,11 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
+from django import template
+from django.conf import settings
+from django.urls import reverse
+
+register = template.Library()
 
 
 def order_create(request):
@@ -107,19 +111,6 @@ def render_to_pdf(template_src, context_dict={}):
     return None
 
 
-data = {
-    "company": "Dennnis Ivanov Company",
-    "address": "123 Street name",
-    "city": "Vancouver",
-    "state": "WA",
-    "zipcode": "98663",
-
-
-    "phone": "555-555-2345",
-    "email": "youremail@dennisivy.com",
-    "website": "dennisivy.com",
-    }
-
 #Opens up page as PDF
 class ViewPDF(View):
     def get(self, request, id, *args, **kwargs):
@@ -147,3 +138,51 @@ class DownloadPDF(View):
         content = "attachment; filename='%s'" %(filename)
         response['Content-Disposition'] = content
         return response
+
+
+class DialogsView(View):
+    def get(self, request):
+        chats = Chat.objects.filter(members__in=[request.user.id])
+        return render(request, 'orders/list_of_chats.html', {'user_profile': request.user, 'chats': chats})
+
+
+class MessagesView(View):
+    def get(self, request, chat_id):
+        try:
+            chat = Chat.objects.get(id=chat_id)
+            if request.user in chat.members.all():
+                chat.message_set.filter(is_readed=False).exclude(author=request.user).update(is_readed=True)
+            else:
+                chat = None
+        except Chat.DoesNotExist:
+            chat = None
+ 
+        return render(
+            request,
+            'orders/usersmessages.html',
+            {
+                'user_profile': request.user,
+                'chat': chat,
+                'form': MessageForm()
+            }
+        )
+ 
+    def post(self, request, chat_id):
+        form = MessageForm(data=request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.chat_id = chat_id
+            message.author = request.user
+            message.save()
+        return redirect(reverse('orders:messages', kwargs={'chat_id': chat_id}))
+
+class CreateDialogView(View):
+    def get(self, request, user_id):
+        chats = Chat.objects.filter(members__in=[request.user.id, user_id], type=Chat.DIALOG)
+        if chats.count() == 0:
+            chat = Chat.objects.create()
+            chat.members.add(request.user)
+            chat.members.add(user_id)
+        else:
+            chat = chats.first()
+        return redirect(reverse('orders:messages', kwargs={'chat_id': chat.id}))

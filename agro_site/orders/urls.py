@@ -28,4 +28,7 @@ urlpatterns = [
     ),
     path('pdf_view/<int:id>/', views.ViewPDF.as_view(), name="pdf_view"),
     path('pdf_download/<int:id>/', views.DownloadPDF.as_view(), name="pdf_download"),
+    path('dialogs/', views.DialogsView.as_view(), name='dialogs'),
+    path('dialogs/create/<int:user_id>/', views.CreateDialogView.as_view(), name='create_dialog'),
+    path('dialogs/<int:chat_id>/', views.MessagesView.as_view(), name='messages'),
 ]

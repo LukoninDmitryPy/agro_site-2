@@ -15,6 +15,10 @@
       <a class="nav-link" href="{% url 'orders:ordersales' user.username %}">
       <span style=color:red>Мои продажи</span></a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'orders:dialogs'%}">
+      <span style=color:red>Сообщения</span></a>
+    </li>
     
     {% if perms.sales_backend.add_product %}
     <li class="nav-item">

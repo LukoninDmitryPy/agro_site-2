@@ -35,6 +35,7 @@
           
           <a class="btn btn-info" href="{% url 'orders:pdf_view' i.id%}" target="_blank">View Invoice</a>
           <a class="btn btn-info"  href="{% url 'orders:pdf_download' i.id%}">Download Invoice</a>
+          <a class="btn btn-info"  href="{% url 'orders:create_dialog' i.order.user_id%}">Отправить ттрек номер</a>
         </li>
         </ul>
     {% if not forloop.last %}

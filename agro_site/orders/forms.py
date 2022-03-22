@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Order, Message
 
 
 class OrderCreateForm(forms.ModelForm):
@@ -25,3 +25,9 @@ class OrderCollectingForm(forms.ModelForm):
         fields = [
             'status_order',
         ]
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['message']
+        labels = {'message': ""}

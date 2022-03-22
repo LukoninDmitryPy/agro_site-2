@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if not chat %}
+    <div class="panel panel-body">
+        "Невозможно начать беседу. Не найден пользователь или вы не имеете доступа к данной беседе."
+    </div>
+{% else %}
+    {% load user_filters %}
+    {% if chat %}
+        <div id="messages" class="panel">
+            <div id="innerMessages">
+                {% for message in chat.message_set.all %}
+                        {% include 'orders/message.html' with message_item=message %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <div id="message\_form">
+        <form id="message-form" class="panel panel-body" method="post" >
+            {% csrf_token %}
+            {% for field in form %}
+            {{ field }}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary" onclick="return ETextEditor.validateForm('message-form')">Отправить</button>
+        </form>
+    </div>
+{% endif %}
+{% endblock %}
