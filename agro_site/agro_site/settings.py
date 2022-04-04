@@ -15,6 +15,8 @@ ALLOWED_HOSTS = [
     'testserver',
     'www.sertest2.pythonanywhere.com',
     'sertest2.pythonanywhere.com',
+    'agroagregator.com',
+    'www.agroagregator.com'
 ]
 
 AUTHENTICATION_BACKENDS = (
