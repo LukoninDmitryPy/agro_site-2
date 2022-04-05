@@ -33,13 +33,13 @@ class Product(models.Model):
     discount = models.CharField(max_length=200)
     on_sale=models.BooleanField(default=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['name', 'product_seller','product_group'],
-                name='unique_name_product_seller_product_group'
-            )
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(
+    #             fields=['name', 'product_seller','product_group'],
+    #             name='unique_name_product_seller_product_group'
+    #         )
+    #     ]
 
     def __str__(self):
         return self.name
