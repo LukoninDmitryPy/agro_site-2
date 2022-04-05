@@ -12,7 +12,6 @@ from cart.forms import CartAddProductFrom
 from django.views.generic import ListView
 from django.db.models import Q
 from agroblog.models import Post
-from users.models import MyUser as User
 
 
 
@@ -50,35 +49,6 @@ def product_detail(request, id):
         'cart_product_form': cart_product_form
     }
     return render(request, 'sales_backend/product_detail.html', context)
-
-def product_detail_for_sale(request, id):
-    product = get_object_or_404(Product, pk=id)
-    if product.product_seller != request.user:
-        return redirect('sales_backend:product_detail', product.id)
-    form = forms.ProductForSellerForm(
-        request.POST or None,
-        files=request.FILES or None,
-        instance=product
-    )
-    if form.is_valid():
-        form.save
-        return redirect('sales_backend:product_detail', product.id)
-    context = {
-        'form': form,
-        'id': id
-    }
-    return render(request, 'sales_backend/product_detail_for_seller.html', context)
-
-def products_of_seller(request, username):
-    seller = get_object_or_404(User,username=username)
-    product1 = get_object_or_404(Product, product_seller=seller)
-    product = Product.objects.filter(product_seller=seller)
-    if product1.product_seller != request.user:
-        return redirect('sales_backend:index')
-    context = {
-        'product': product,
-    }
-    return render(request, 'sales_backend/products_of_seller.html', context)
 
 
 @permission_required('sales_backend.add_product', login_url='sales_backend:denied')
@@ -140,22 +110,4 @@ class SearchResultsView(ListView):
         )
         return object_list
 
-def ofert(request):
-    template = 'sales_backend/ofert.html'
-    return render(request, template)
 
-def politic(request):
-    template = 'sales_backend/politic.html'
-    return render(request, template)
-
-def dostavka_i_oplata(request):
-    template = 'sales_backend/dostavka_i_oplata.html'
-    return render(request, template)
-
-def poryadok_oplati(request):
-    template = 'sales_backend/poryadok_oplati.html'
-    return render(request, template)
-
-def rekuisits(request):
-    template = 'sales_backend/rekuisits.html'
-    return render(request, template)

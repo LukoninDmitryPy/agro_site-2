@@ -12,7 +12,7 @@ class ProductGroup(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.TextField()
     product_group = models.ForeignKey(
         ProductGroup,
         on_delete=models.CASCADE,
@@ -31,7 +31,6 @@ class Product(models.Model):
     description = models.TextField()
     count = models.IntegerField()
     discount = models.CharField(max_length=200)
-    on_sale=models.BooleanField(default=True)
 
     # class Meta:
     #     constraints = [

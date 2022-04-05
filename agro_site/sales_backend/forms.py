@@ -49,27 +49,3 @@ class SellerForm(forms.Form):
         Укажите, пожалуйста, Имя, Фамилию,
         Телефон, ИНН организации или ИП
         ''')
-
-class ProductForSellerForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        fields = (
-            'name',
-            'product_group',
-            'price',
-            'description',
-            'count',
-            'discount',
-            'on_sale'
-        )
-        labels = {
-            'name': 'Наименование товара',
-            'product_group': 'Категория товара',
-            'price': 'Цена',
-            'description': 'Описание',
-            'count': 'Наличие',
-            'discount': 'Скидка',
-        }
-        help_texts = {
-            'discount': 'Введите условие выполнение Вашей скидки'
-        }
