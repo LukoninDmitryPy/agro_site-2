@@ -26,4 +26,5 @@ urlpatterns = [
     path('dost_i_oplat/', views.dostavka_i_oplata, name='d_i'),
     path('por_opl/', views.poryadok_oplati, name='p_o'),
     path('requi/', views.rekuisits, name='req'),
+    path('pay/', views.pay, name='pay'),
 ]

@@ -159,3 +159,7 @@ def poryadok_oplati(request):
 def rekuisits(request):
     template = 'sales_backend/rekuisits.html'
     return render(request, template)
+
+def pay(request):
+    template = 'sales_backend/pay.html'
+    return render(request, template)
