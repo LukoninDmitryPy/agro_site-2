@@ -110,14 +110,3 @@ class SearchResultsView(ListView):
         )
         return object_list
 
-
-<<<<<<< HEAD
-def rekuisits(request):
-    template = 'sales_backend/rekuisits.html'
-    return render(request, template)
-
-def pay(request):
-    template = 'sales_backend/pay.html'
-    return render(request, template)
-=======
->>>>>>> d00c9fc93965c49c7aaae998056b093707bf610a
