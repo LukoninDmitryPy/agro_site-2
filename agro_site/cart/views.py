@@ -15,10 +15,14 @@ def cart_add(request, id):
     form = CartAddProductFrom(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
+        if cd['Количество'] <= product.count:
+            amount = cd['Количество']
+        else:
+            amount = product.count
         cart.add(
             product=product,
             count=product.count,
-            quantity=cd['Количество'],
+            quantity=amount,
         )
     return redirect(
         'sales_backend:product_detail',

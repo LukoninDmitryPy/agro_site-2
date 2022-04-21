@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from sales_backend.views import product_detail_for_sale
+
 
 app_name = 'sales_backend'
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path('success/', views.success_view, name='success'),
     path('denied/', views.get_denied, name='denied'),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
+<<<<<<< HEAD
     path('edit_product/<int:id>/', product_detail_for_sale, name='edit_product'),
     path('my_products/<str:username>/', views.products_of_seller, name='products_of_seller'),
     path('ofert/', views.ofert, name='ofert'),
@@ -27,4 +28,6 @@ urlpatterns = [
     path('por_opl/', views.poryadok_oplati, name='p_o'),
     path('requi/', views.rekuisits, name='req'),
     path('pay/', views.pay, name='pay'),
+=======
+>>>>>>> d00c9fc93965c49c7aaae998056b093707bf610a
 ]
