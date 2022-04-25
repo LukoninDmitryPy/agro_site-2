@@ -1,8 +1,11 @@
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
+
+from .forms import CommentForm
 from . import models, forms
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from agro_site.settings import DEFAULT_FROM_EMAIL
@@ -12,7 +15,7 @@ from cart.forms import CartAddProductFrom
 from django.views.generic import ListView
 from django.db.models import Q
 from agroblog.models import Post
-
+from django.db.models import Avg
 
 
 def index(request):
@@ -41,12 +44,20 @@ def product_group(request, slug):
 
 def product_detail(request, id):
     product_pk = get_object_or_404(Product, pk=id)
+    form = CommentForm()
+    comments = product_pk.comments.all()
     product_group = product_pk.product_group
     cart_product_form = CartAddProductFrom()
+    rating = Product.objects.filter(pk=id).annotate(
+        rating=Avg('comments__rating')
+    ).all()
     context = {
         'product_pk': product_pk,
         'product_group': product_group,
-        'cart_product_form': cart_product_form
+        'cart_product_form': cart_product_form,
+        'form': form,
+        'comments': comments,
+        'rating': rating,
     }
     return render(request, 'sales_backend/product_detail.html', context)
 
@@ -110,3 +121,13 @@ class SearchResultsView(ListView):
         )
         return object_list
 
+@login_required
+def add_comment(request, id):
+    form = forms.CommentForm(request.POST or None)
+    product = get_object_or_404(Product, pk=id)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.author = request.user
+        comment.product = product
+        comment.save()
+    return redirect('sales_backend:product_detail', id=id)

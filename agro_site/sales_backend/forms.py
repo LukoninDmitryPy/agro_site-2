@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, Comment
 
 
 class ProductForm(forms.ModelForm):
@@ -12,7 +12,8 @@ class ProductForm(forms.ModelForm):
             'price',
             'description',
             'count',
-            'discount'
+            'discount',
+            'on_sale'
         )
         labels = {
             'name': 'Наименование товара',
@@ -49,3 +50,14 @@ class SellerForm(forms.Form):
         Укажите, пожалуйста, Имя, Фамилию,
         Телефон, ИНН организации или ИП
         ''')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text', 'rating',)
+        help_texts = {
+            'text': 'Запиши свои мысли',
+        }
+        labels = {
+            'text': 'Текст комментарии',
+        }

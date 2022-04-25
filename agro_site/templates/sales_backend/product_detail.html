@@ -16,6 +16,11 @@
       <li class="list-group-item">
       <b>Описание:</b> {{ product_pk.description }}
       </li>
+      {% for i in rating %}
+      <li class="list-group-item">
+        <b>Рейтинг:</b> {{ i.rating|truncatechars:4 }}
+        </li>
+      {% endfor %}
       <li class="list-group-item">
       <b>Скидка:</b> При заказе от 100шт. = 5%
       </li>
@@ -30,7 +35,9 @@
   <button class="btn btn-primary">
   Добавить в корзину
   </button>
+  
 </form>
+{% include 'sales_backend/includes/comments.html' %}
     </ul>
   </aside>
 </div> 

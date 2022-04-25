@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'agroblog.apps.AgroblogConfig',
     'core.apps.CoreConfig',
     'sorl.thumbnail',
+    'bootstrap3',
 ]
 
 REST_FRAMEWORK = {

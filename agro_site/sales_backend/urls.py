@@ -19,4 +19,5 @@ urlpatterns = [
     path('success/', views.success_view, name='success'),
     path('denied/', views.get_denied, name='denied'),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
+    path('products/<int:id>/comment/', views.add_comment, name='add_comment'),
 ]

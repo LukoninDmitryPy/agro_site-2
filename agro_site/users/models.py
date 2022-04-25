@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import Group
 
 class MyUser(AbstractUser):
     username = models.CharField(max_length=30,
@@ -22,4 +23,5 @@ class MyUser(AbstractUser):
         blank=True
     )
     phone = PhoneNumberField(unique = True, null = False, blank = False)
+    is_seller = models.BooleanField(default=False)
 
