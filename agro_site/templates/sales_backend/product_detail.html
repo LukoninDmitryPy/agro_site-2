@@ -26,18 +26,23 @@
       </li>
       <br>
       <br>
-      <form 
-  action="{% url 'cart:cart_add' product_pk.id %}"
-  method="post"
->
-  {{ cart_product_form }}
-  {% csrf_token %}
-  <button class="btn btn-primary">
-  Добавить в корзину
-  </button>
-  
-</form>
-{% include 'sales_backend/includes/comments.html' %}
+      {% if not user.username %}
+      <button class="btn btn-primary" href="{% url 'users:signup' %}">
+        Добавить в корзину
+      </button>
+      {% else %}
+        <form 
+          action="{% url 'cart:cart_add' product_pk.id %}"
+          method="post"
+        >
+          {{ cart_product_form }}
+          {% csrf_token %}
+          <button class="btn btn-primary">
+            Добавить в корзину
+          </button>
+        </form>
+        {% include 'sales_backend/includes/comments.html' %}
+      {% endif %}
     </ul>
   </aside>
 </div> 
